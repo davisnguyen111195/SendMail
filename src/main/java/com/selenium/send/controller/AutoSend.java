@@ -9,6 +9,9 @@ import java.util.Random;
 import static com.selenium.send.controller.SendController.userPC;
 
 public class AutoSend {
+
+
+
     static Integer i = 1;
     static String line1 = null;
     static String line2 = null;
@@ -29,13 +32,20 @@ public class AutoSend {
             fileReader2.close();
             Random rd = new Random();
             while(line1 != null) {
-                SendController.Send(line1, line2s.get(rd.nextInt(4)), i);
+                if(SendController.Send(line1, line2s.get(rd.nextInt(4)), i)) {
+                    System.out.println("Sent");
+                } else {
+                    System.out.println("Not");
+                }
                 System.out.println("Profile" + i);
                 i++;
                 line1 = br1.readLine();
+                Thread.sleep(600000);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
+
+
 }
